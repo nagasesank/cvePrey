@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# This Install all the dependencies along with the tool
+
+# Download the geckodriver package (Mozilla) and move to $HOME/.local/bin/geckodriver
+curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest \
+| grep -oP "browser_download_url.*linux64.tar.gz\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget -qi -
+
+tar -xvf *linux64.tar.gz 1>$- && mv geckodriver $HOME/.local/bin/geckodriver && rm *linux64.tar.gz
+
+# Installing cvePrey
+pip install -r requirements.txt
+pip install git+https://github.com/iam048/cvePrey
